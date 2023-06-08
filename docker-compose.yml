@@ -6,10 +6,10 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 22181:2181
-  
+      - 2181:2181
   kafka:
     image: confluentinc/cp-kafka:latest
+    container_name: my-kafka
     depends_on:
       - zookeeper
     ports:
@@ -17,29 +17,51 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://my-kafka:29092,PLAINTEXT_HOST://my-kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
----
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
-version: "v1"
-services:
   order:
-    image: <username>/order:v1
-    depends_on:
+    depends_on: 
       - kafka
+    image: adoptopenjdk/maven-openjdk11:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    command: mvn spring-boot:run
     ports:
-      - 8080:8082
+      - 8082:8082
+    working_dir: /usr/src
+    volumes:
+      - ./order:/usr/src
+      - ./maven-repo:/root/.m2
+      
   delivery:
-    image: <username>/delivery:v1
-    depends_on:
+    depends_on: 
       - kafka
+    image: adoptopenjdk/maven-openjdk11:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    command: mvn spring-boot:run
     ports:
-      - 8080:8083
+      - 8083:8083
+    working_dir: /usr/src
+    volumes:
+      - ./delivery:/usr/src
+      - ./maven-repo:/root/.m2
+      
   product:
-    image: <username>/product:v1
-    depends_on:
+    depends_on: 
       - kafka
+    image: adoptopenjdk/maven-openjdk11:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    command: mvn spring-boot:run
     ports:
-      - 8080:8085
+      - 8085:8085
+    working_dir: /usr/src
+    volumes:
+      - ./product:/usr/src
+      - ./maven-repo:/root/.m2
+      
