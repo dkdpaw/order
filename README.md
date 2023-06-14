@@ -21,8 +21,8 @@ cd /bin
 See the README.md files inside the each microservices directory:
 
 - order
+- stock
 - delivery
-- product
 
 
 ## Run API Gateway (Spring Gateway)
@@ -34,15 +34,15 @@ mvn spring-boot:run
 ## Test by API
 - order
 ```
- http :8088/orders id="id" productName="productName" productId="productId" customerId="customerId" qty="qty" status="status" 
+ http :8088/orders orderId="orderId" productId="productId" customerId="customerId" qty="qty" 
+```
+- stock
+```
+ http :8088/stocks id="id" productName="productName" stock="stock" productId="productId" 
 ```
 - delivery
 ```
- http :8088/deliveries id="id" orderId="orderId" productName="productName" productId="productId" customerId="customerId" qty="qty" status="status" 
-```
-- product
-```
- http :8088/stocks id="id" productName="productName" stock="stock" productId="productId" 
+ http :8088/deliveries deliveryId="deliveryId" orderId="orderId" customerId="customerId" 
 ```
 
 

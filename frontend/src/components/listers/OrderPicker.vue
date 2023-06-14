@@ -15,7 +15,7 @@
                             <v-list-item-title>
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                ProductName :  {{item.productName }}
+                                OrderId :  {{item.orderId }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 ProductId :  {{item.productId }}
@@ -25,9 +25,6 @@
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 Qty :  {{item.qty }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
-                                Status :  {{item.status }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 
@@ -79,11 +76,7 @@
                 var obj = {}
                 if(val != undefined) {
                     var arr = this.list[val]._links.self.href.split('/');
-                    obj['id'] = arr[4]; 
-                    
-                    
-                    
-                    
+                    obj['orderId'] = arr[4]; 
                     
                     
                     

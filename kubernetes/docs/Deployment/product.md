@@ -5,12 +5,12 @@
 ### Cluster에 product Deployment를 생성하려면 아래의 명령어를 실행하세요.
 
 ```
-$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T140325Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=8c555cf28b8108ed7163f2db9723ccd63971786819375163d0a15b7ed0a889ad
+$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=9d9efb33fd8f874d01a83002a197d5c9e177a7d6b07686999a90be9a49ddc531
 ```
 - Yaml 파일에 명시된 스펙으로 product Deployment를 생성합니다.
 
 ```
-$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T140325Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=8c555cf28b8108ed7163f2db9723ccd63971786819375163d0a15b7ed0a889ad
+$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=9d9efb33fd8f874d01a83002a197d5c9e177a7d6b07686999a90be9a49ddc531
 ```
 - Create가 된 상태라면 product Deployment의 수정이 이루어지고, Create가 된 상태가 아니라면 product Deployment를 Create 해주는 명령어입니다.  
 #

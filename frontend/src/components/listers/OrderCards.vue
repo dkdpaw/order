@@ -68,11 +68,10 @@
             me.values = temp.data._embedded.orders;
             
             me.newValue = {
-                'productName': '',
+                'orderId': 0,
                 'productId': '',
-                'customerId': 0,
+                'customerId': '',
                 'qty': 0,
-                'status': '',
             }
         },
         methods:{

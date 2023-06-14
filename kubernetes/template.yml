@@ -43,22 +43,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: delivery
+  name: stock
   labels:
-    app: delivery
+    app: stock
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: delivery
+      app: stock
   template:
     metadata:
       labels:
-        app: delivery
+        app: stock
     spec:
       containers:
-        - name: delivery
-          image: username/delivery:latest
+        - name: stock
+          image: username/stock:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -83,22 +83,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product
+  name: delivery
   labels:
-    app: product
+    app: delivery
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: product
+      app: delivery
   template:
     metadata:
       labels:
-        app: product
+        app: delivery
     spec:
       containers:
-        - name: product
-          image: username/product:latest
+        - name: delivery
+          image: username/delivery:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -142,6 +142,23 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: stock
+  labels:
+    app: stock
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: stock
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
   name: delivery
   labels:
     app: delivery
@@ -151,21 +168,4 @@ spec:
       targetPort: 8080
   selector:
     app: delivery
-
-
----
-
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: product
-  labels:
-    app: product
-spec:
-  ports:
-    - port: 8080
-      targetPort: 8080
-  selector:
-    app: product
 

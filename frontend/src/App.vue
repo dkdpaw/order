@@ -52,19 +52,6 @@
 
                     <v-list-item
                         class="px-2"
-                        key="deliveries"
-                        to="/deliveries"
-                        @click="changeUrl()"
-                        color="deep-purple lighten-2"
-                        style="font-weight:700;"
-                    >
-                        Delivery
-                    </v-list-item>
-
-
-
-                    <v-list-item
-                        class="px-2"
                         key="stocks"
                         to="/stocks"
                         @click="changeUrl()"
@@ -72,6 +59,19 @@
                         style="font-weight:700;"
                     >
                         Stock
+                    </v-list-item>
+
+
+
+                    <v-list-item
+                        class="px-2"
+                        key="deliveries"
+                        to="/deliveries"
+                        @click="changeUrl()"
+                        color="deep-purple lighten-2"
+                        style="font-weight:700;"
+                    >
+                        Delivery
                     </v-list-item>
 
 
@@ -145,16 +145,16 @@
                                             class="mx-auto"
                                             outlined
                                             rounded
-                                            key="deliveries"
-                                            to="/deliveries"
+                                            key="stocks"
+                                            to="/stocks"
                                             @click="changeUrl()"
                                             color="deep-purple lighten-2"
                                             style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
                                         >
-                                            Delivery
+                                            Stock
                                         </v-btn>
                                     </template>
-                                    <span>Delivery</span>
+                                    <span>Stock</span>
                                 </v-tooltip>
                             </v-card-actions>
                         </v-card>
@@ -181,16 +181,16 @@
                                             class="mx-auto"
                                             outlined
                                             rounded
-                                            key="stocks"
-                                            to="/stocks"
+                                            key="deliveries"
+                                            to="/deliveries"
                                             @click="changeUrl()"
                                             color="deep-purple lighten-2"
                                             style="font-weight:500; font-size:20px; padding:15px; border:solid 2px; max-width:250px; overflow:hidden"
                                         >
-                                            Stock
+                                            Delivery
                                         </v-btn>
                                     </template>
-                                    <span>Stock</span>
+                                    <span>Delivery</span>
                                 </v-tooltip>
                             </v-card-actions>
                         </v-card>

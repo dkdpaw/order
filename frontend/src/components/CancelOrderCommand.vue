@@ -2,7 +2,7 @@
 
     <v-card outlined>
         <v-card-title>
-            Cancel
+            CancelOrder
         </v-card-title>
 
         <v-card-text>
@@ -13,9 +13,9 @@
             <v-btn
                     color="deep-purple lighten-2"
                     text
-                    @click="cancel"
+                    @click="cancelOrder"
             >
-                Cancel
+                CancelOrder
             </v-btn>
             
             <v-btn
@@ -33,7 +33,7 @@
 <script>
    
     export default {
-        name: 'CancelCommand',
+        name: 'CancelOrderCommand',
         components:{},
         props: {},
         data: () => ({
@@ -45,8 +45,8 @@
         watch: {
         },
         methods: {
-            cancel() {
-                this.$emit('cancel', this.value);
+            cancelOrder() {
+                this.$emit('cancelOrder', this.value);
             },
             close() {
                 this.$emit('closeDialog');

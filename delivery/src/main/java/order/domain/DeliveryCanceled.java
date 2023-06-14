@@ -7,17 +7,17 @@ import order.infra.AbstractEvent;
 
 @Data
 @ToString
-public class DeliveryStarted extends AbstractEvent {
+public class DeliveryCanceled extends AbstractEvent {
 
     private Long deliveryId;
     private Long orderId;
     private String customerId;
 
-    public DeliveryStarted(Delivery aggregate) {
+    public DeliveryCanceled(Delivery aggregate) {
         super(aggregate);
     }
 
-    public DeliveryStarted() {
+    public DeliveryCanceled() {
         super();
     }
 }

@@ -8,11 +8,11 @@ Vue.use(Router);
 import OrderManager from "./components/listers/OrderCards"
 import OrderDetail from "./components/listers/OrderDetail"
 
-import DeliveryManager from "./components/listers/DeliveryCards"
-import DeliveryDetail from "./components/listers/DeliveryDetail"
-
 import StockManager from "./components/listers/StockCards"
 import StockDetail from "./components/listers/StockDetail"
+
+import DeliveryManager from "./components/listers/DeliveryCards"
+import DeliveryDetail from "./components/listers/DeliveryDetail"
 
 
 export default new Router({
@@ -31,17 +31,6 @@ export default new Router({
             },
 
             {
-                path: '/deliveries',
-                name: 'DeliveryManager',
-                component: DeliveryManager
-            },
-            {
-                path: '/deliveries/:id',
-                name: 'DeliveryDetail',
-                component: DeliveryDetail
-            },
-
-            {
                 path: '/stocks',
                 name: 'StockManager',
                 component: StockManager
@@ -50,6 +39,17 @@ export default new Router({
                 path: '/stocks/:id',
                 name: 'StockDetail',
                 component: StockDetail
+            },
+
+            {
+                path: '/deliveries',
+                name: 'DeliveryManager',
+                component: DeliveryManager
+            },
+            {
+                path: '/deliveries/:id',
+                name: 'DeliveryDetail',
+                component: DeliveryDetail
             },
 
 

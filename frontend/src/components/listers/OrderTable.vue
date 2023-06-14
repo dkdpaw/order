@@ -66,12 +66,10 @@
             values: [],
             headers: 
                 [
-                    { text: "id", value: "id" },
-                    { text: "productName", value: "productName" },
+                    { text: "orderId", value: "orderId" },
                     { text: "productId", value: "productId" },
                     { text: "customerId", value: "customerId" },
                     { text: "qty", value: "qty" },
-                    { text: "status", value: "status" },
                 ],
             order : [],
             newValue: {},
@@ -89,11 +87,10 @@
             this.values = temp.data._embedded.orders;
 
             this.newValue = {
-                'productName': '',
+                'orderId': 0,
                 'productId': '',
-                'customerId': 0,
+                'customerId': '',
                 'qty': 0,
-                'status': '',
             }
         },
         methods: {

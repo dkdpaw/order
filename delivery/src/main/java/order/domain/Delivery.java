@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 import order.DeliveryApplication;
-import order.domain.DeliveryCompleted;
+import order.domain.DeliveryCanceled;
 import order.domain.DeliveryStarted;
 
 @Entity
@@ -15,27 +15,19 @@ public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long deliveryId;
 
     private Long orderId;
 
-    private String productName;
-
-    private String productId;
-
-    private Long customerId;
-
-    private Integer qty;
-
-    private String status;
+    private String customerId;
 
     @PostPersist
     public void onPostPersist() {
         DeliveryStarted deliveryStarted = new DeliveryStarted(this);
         deliveryStarted.publishAfterCommit();
 
-        DeliveryCompleted deliveryCompleted = new DeliveryCompleted(this);
-        deliveryCompleted.publishAfterCommit();
+        DeliveryCanceled deliveryCanceled = new DeliveryCanceled(this);
+        deliveryCanceled.publishAfterCommit();
     }
 
     public static DeliveryRepository repository() {
@@ -45,29 +37,7 @@ public class Delivery {
         return deliveryRepository;
     }
 
-    public static void deliveryStart(OrderPlaced orderPlaced) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Delivery delivery = new Delivery();
-        repository().save(delivery);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderPlaced.get???()).ifPresent(delivery->{
-            
-            delivery // do something
-            repository().save(delivery);
-
-
-         });
-        */
-
-    }
-
-    public static void deliveryCancel(OrderCanceled orderCanceled) {
+    public static void cancelDelivery(OrderCanceled orderCanceled) {
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -79,6 +49,28 @@ public class Delivery {
         /** Example 2:  finding and process
         
         repository().findById(orderCanceled.get???()).ifPresent(delivery->{
+            
+            delivery // do something
+            repository().save(delivery);
+
+
+         });
+        */
+
+    }
+
+    public static void startDelivery(OrderPlaced orderPlaced) {
+        //implement business logic here:
+
+        /** Example 1:  new item 
+        Delivery delivery = new Delivery();
+        repository().save(delivery);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(orderPlaced.get???()).ifPresent(delivery->{
             
             delivery // do something
             repository().save(delivery);

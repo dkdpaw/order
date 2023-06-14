@@ -1,9 +1,9 @@
 package order.common;
 
 import io.cucumber.spring.CucumberContextConfiguration;
-import order.ProductApplication;
+import order.StockApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @CucumberContextConfiguration
-@SpringBootTest(classes = { ProductApplication.class })
+@SpringBootTest(classes = { StockApplication.class })
 public class CucumberSpingConfiguration {}

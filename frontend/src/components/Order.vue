@@ -17,11 +17,10 @@
         </v-card-title >
 
         <v-card-text>
-            <String label="ProductName" v-model="value.productName" :editMode="editMode"/>
+            <Number label="OrderId" v-model="value.orderId" :editMode="editMode"/>
             <String label="ProductId" v-model="value.productId" :editMode="editMode"/>
-            <Number label="CustomerId" v-model="value.customerId" :editMode="editMode"/>
+            <String label="CustomerId" v-model="value.customerId" :editMode="editMode"/>
             <Number label="Qty" v-model="value.qty" :editMode="editMode"/>
-            <String label="Status" v-model="value.status" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -40,8 +39,8 @@
                     @click="save"
                     v-else
             >
-                Order
-                Cancel
+                PlaceOrder
+                CancelOrder
             </v-btn>
             <v-btn
                     color="deep-purple lighten-2"

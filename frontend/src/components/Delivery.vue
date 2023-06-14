@@ -17,12 +17,9 @@
         </v-card-title >
 
         <v-card-text>
+            <Number label="DeliveryId" v-model="value.deliveryId" :editMode="editMode"/>
             <Number label="OrderId" v-model="value.orderId" :editMode="editMode"/>
-            <String label="ProductName" v-model="value.productName" :editMode="editMode"/>
-            <String label="ProductId" v-model="value.productId" :editMode="editMode"/>
-            <Number label="CustomerId" v-model="value.customerId" :editMode="editMode"/>
-            <Number label="Qty" v-model="value.qty" :editMode="editMode"/>
-            <String label="Status" v-model="value.status" :editMode="editMode"/>
+            <String label="CustomerId" v-model="value.customerId" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>

@@ -2,7 +2,7 @@
 
     <v-card outlined>
         <v-card-title>
-            Order
+            PlaceOrder
         </v-card-title>
 
         <v-card-text>
@@ -13,9 +13,9 @@
             <v-btn
                     color="deep-purple lighten-2"
                     text
-                    @click="order"
+                    @click="placeOrder"
             >
-                Order
+                PlaceOrder
             </v-btn>
             
             <v-btn
@@ -33,7 +33,7 @@
 <script>
    
     export default {
-        name: 'OrderCommand',
+        name: 'PlaceOrderCommand',
         components:{},
         props: {},
         data: () => ({
@@ -45,8 +45,8 @@
         watch: {
         },
         methods: {
-            order() {
-                this.$emit('order', this.value);
+            placeOrder() {
+                this.$emit('placeOrder', this.value);
             },
             close() {
                 this.$emit('closeDialog');

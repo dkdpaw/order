@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
-import order.ProductApplication;
-import order.domain.StockDecreased;
-import order.domain.StockIncrease;
+import order.StockApplication;
 
 @Entity
 @Table(name = "Stock_table")
@@ -24,22 +22,16 @@ public class Stock {
     private String productId;
 
     @PostPersist
-    public void onPostPersist() {
-        StockDecreased stockDecreased = new StockDecreased(this);
-        stockDecreased.publishAfterCommit();
-
-        StockIncrease stockIncrease = new StockIncrease(this);
-        stockIncrease.publishAfterCommit();
-    }
+    public void onPostPersist() {}
 
     public static StockRepository repository() {
-        StockRepository stockRepository = ProductApplication.applicationContext.getBean(
+        StockRepository stockRepository = StockApplication.applicationContext.getBean(
             StockRepository.class
         );
         return stockRepository;
     }
 
-    public static void stockDecrease(DeliveryCompleted deliveryCompleted) {
+    public static void stockDecrease(DeliveryStarted deliveryStarted) {
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -50,7 +42,7 @@ public class Stock {
 
         /** Example 2:  finding and process
         
-        repository().findById(deliveryCompleted.get???()).ifPresent(stock->{
+        repository().findById(deliveryStarted.get???()).ifPresent(stock->{
             
             stock // do something
             repository().save(stock);
@@ -61,7 +53,7 @@ public class Stock {
 
     }
 
-    public static void stockIncrease(DeliveryCompleted deliveryCompleted) {
+    public static void stockIncrease(DeliveryCanceled deliveryCanceled) {
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -72,7 +64,7 @@ public class Stock {
 
         /** Example 2:  finding and process
         
-        repository().findById(deliveryCompleted.get???()).ifPresent(stock->{
+        repository().findById(deliveryCanceled.get???()).ifPresent(stock->{
             
             stock // do something
             repository().save(stock);

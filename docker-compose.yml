@@ -37,7 +37,7 @@ services:
       - ./order:/usr/src
       - ./maven-repo:/root/.m2
       
-  delivery:
+  stock:
     depends_on: 
       - kafka
     image: adoptopenjdk/maven-openjdk11:latest
@@ -48,10 +48,10 @@ services:
       - 8083:8083
     working_dir: /usr/src
     volumes:
-      - ./delivery:/usr/src
+      - ./stock:/usr/src
       - ./maven-repo:/root/.m2
       
-  product:
+  delivery:
     depends_on: 
       - kafka
     image: adoptopenjdk/maven-openjdk11:latest
@@ -62,6 +62,6 @@ services:
       - 8085:8085
     working_dir: /usr/src
     volumes:
-      - ./product:/usr/src
+      - ./delivery:/usr/src
       - ./maven-repo:/root/.m2
       

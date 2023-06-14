@@ -15,25 +15,29 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private String productName;
+    private Long orderId;
 
     private String productId;
 
-    private Long customerId;
+    private String customerId;
 
     private Integer qty;
 
-    private String status;
-
     @PostPersist
     public void onPostPersist() {
-        OrderPlaced orderPlaced = new OrderPlaced(this);
-        orderPlaced.publishAfterCommit();
-
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
+        // Get request from Order
+        //order.external.Order order =
+        //    Application.applicationContext.getBean(order.external.OrderService.class)
+        //    .getOrder(/** mapping value needed */);
+
+    }
+
+    @PrePersist
+    public void onPrePersist() {
+        OrderPlaced orderPlaced = new OrderPlaced(this);
+        orderPlaced.publishAfterCommit();
     }
 
     public static OrderRepository repository() {

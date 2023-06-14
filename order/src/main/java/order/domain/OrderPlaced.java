@@ -9,12 +9,10 @@ import order.infra.AbstractEvent;
 @ToString
 public class OrderPlaced extends AbstractEvent {
 
-    private Long id;
-    private String productName;
+    private Long orderId;
     private String productId;
-    private Long customerId;
+    private String customerId;
     private Integer qty;
-    private String status;
 
     public OrderPlaced(Order aggregate) {
         super(aggregate);
