@@ -5,12 +5,12 @@
 ### Cluster에 product Service를 생성하려면 아래의 명령어를 실행하세요.
 
 ```
-$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=3df0bfdd5058d542eebb064eed7cf821a3aef323b1e2b3b2ba6920590ac253c8
+$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T140602Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=1d872cd8269d58cafbf16d547695ce4d272a39946bf0b11423df5f3580c77104
 ```
 - Yaml 파일에 명시된 스펙으로 product Service를 생성합니다.  
 
 ```
-$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=3df0bfdd5058d542eebb064eed7cf821a3aef323b1e2b3b2ba6920590ac253c8
+$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/product.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T140602Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=1d872cd8269d58cafbf16d547695ce4d272a39946bf0b11423df5f3580c77104
 ```
 - Create가 된 상태라면 product Service의 수정이 이루어지고, Create가 된 상태가 아니라면 product Service를 Create 해주는 명령어입니다.
 #

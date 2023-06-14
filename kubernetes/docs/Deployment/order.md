@@ -5,12 +5,12 @@
 ### Cluster에 order Deployment를 생성하려면 아래의 명령어를 실행하세요.
 
 ```
-$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=66703316d258ca260204a826b3ea243d22dc99db48a8ae7fa760052e70c2c81f
+$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T140602Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=bd91b53876185db7fd48ef25e8ea73279d583726b57ce22f51f12f0254a926c4
 ```
 - Yaml 파일에 명시된 스펙으로 order Deployment를 생성합니다.
 
 ```
-$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=66703316d258ca260204a826b3ea243d22dc99db48a8ae7fa760052e70c2c81f
+$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Deployment/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T140602Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=bd91b53876185db7fd48ef25e8ea73279d583726b57ce22f51f12f0254a926c4
 ```
 - Create가 된 상태라면 order Deployment의 수정이 이루어지고, Create가 된 상태가 아니라면 order Deployment를 Create 해주는 명령어입니다.  
 #

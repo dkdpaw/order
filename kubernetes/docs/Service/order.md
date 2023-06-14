@@ -5,12 +5,12 @@
 ### Cluster에 order Service를 생성하려면 아래의 명령어를 실행하세요.
 
 ```
-$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=fe5197fa36fbf8d4a37c551b2a221c9974f432ff1b642b214b8276c6a9d39ba6
+$ kubectl create -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T140602Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=a38e7b509ecbc6e51c4a5ec75631d65c6eeeb0dd04c72bc9231e49292bbdc741
 ```
 - Yaml 파일에 명시된 스펙으로 order Service를 생성합니다.  
 
 ```
-$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T135727Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=fe5197fa36fbf8d4a37c551b2a221c9974f432ff1b642b214b8276c6a9d39ba6
+$ kubectl apply -f https://minio.msaez.io/labs-msaez.io/yamlStorage/7e5b1b0bfbd1261ead11488a9ef157ae/dkdpaw%40gmail.com/Service/order.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20230614%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230614T140602Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=a38e7b509ecbc6e51c4a5ec75631d65c6eeeb0dd04c72bc9231e49292bbdc741
 ```
 - Create가 된 상태라면 order Service의 수정이 이루어지고, Create가 된 상태가 아니라면 order Service를 Create 해주는 명령어입니다.
 #
