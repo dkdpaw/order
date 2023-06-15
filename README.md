@@ -98,200 +98,228 @@ mvn spring-boot:run
 ```
 - 적용 후 REST API 의 테스트
 ```
-# app 서비스의 주문처리
-http localhost:8081/orders item="통닭"
+# 상품주문 처리
+gitpod /workspace/order (main) $ http localhost:8082/orders customerId=1 productId=1 productName="TV" qty=1
+HTTP/1.1 201 
+Connection: keep-alive
+Content-Type: application/json
+Date: Wed, 14 Jun 2023 14:34:34 GMT
+Keep-Alive: timeout=60
+Location: http://localhost:8082/orders/1
+Transfer-Encoding: chunked
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 
-# store 서비스의 배달처리
-http localhost:8083/주문처리s orderId=1
-
-# 주문 상태 확인
-http localhost:8081/orders/1
-
-```
-
-
-## 비동기식 호출 / 시간적 디커플링 / 장애격리 / 최종 (Eventual) 일관성 테스트
-
-
-결제가 이루어진 후에 상점시스템으로 이를 알려주는 행위는 동기식이 아니라 비 동기식으로 처리하여 상점 시스템의 처리를 위하여 결제주문이 블로킹 되지 않아도록 처리한다.
- 
-- 이를 위하여 결제이력에 기록을 남긴 후에 곧바로 결제승인이 되었다는 도메인 이벤트를 카프카로 송출한다(Publish)
- 
-```
-package fooddelivery;
-
-@Entity
-@Table(name="결제이력_table")
-public class 결제이력 {
-
- ...
-    @PrePersist
-    public void onPrePersist(){
-        결제승인됨 결제승인됨 = new 결제승인됨();
-        BeanUtils.copyProperties(this, 결제승인됨);
-        결제승인됨.publish();
-    }
-
-}
-```
-- 상점 서비스에서는 결제승인 이벤트에 대해서 이를 수신하여 자신의 정책을 처리하도록 PolicyHandler 를 구현한다:
-
-```
-package fooddelivery;
-
-...
-
-@Service
-public class PolicyHandler{
-
-    @StreamListener(KafkaProcessor.INPUT)
-    public void whenever결제승인됨_주문정보받음(@Payload 결제승인됨 결제승인됨){
-
-        if(결제승인됨.isMe()){
-            System.out.println("##### listener 주문정보받음 : " + 결제승인됨.toJson());
-            // 주문 정보를 받았으니, 요리를 슬슬 시작해야지..
-            
+{
+    "_links": {
+        "order": {
+            "href": "http://localhost:8082/orders/1"
+        },
+        "self": {
+            "href": "http://localhost:8082/orders/1"
         }
-    }
+    },
+    "customerId": "1",
+    "productId": "1",
+    "productName": "TV",
+    "qty": 1
+}
 
+
+gitpod /workspace/order (main) $ http localhost:8082/orders
+HTTP/1.1 200 
+Connection: keep-alive
+Content-Type: application/hal+json
+Date: Wed, 14 Jun 2023 14:36:57 GMT
+Keep-Alive: timeout=60
+Transfer-Encoding: chunked
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+
+{
+    "_embedded": {
+        "orders": [
+            {
+                "_links": {
+                    "order": {
+                        "href": "http://localhost:8082/orders/1"
+                    },
+                    "self": {
+                        "href": "http://localhost:8082/orders/1"
+                    }
+                },
+                "customerId": "1",
+                "productId": "1",
+                "productName": "TV",
+                "qty": 1
+            }
+        ]
+    },
+    "_links": {
+        "profile": {
+            "href": "http://localhost:8082/profile/orders"
+        },
+        "self": {
+            "href": "http://localhost:8082/orders"
+        }
+    },
+    "page": {
+        "number": 0,
+        "size": 20,
+        "totalElements": 1,
+        "totalPages": 1
+    }
+}
+
+
+# 배송등록 처리
+gitpod /workspace/order (main) $ http localhost:8085/deliveries deliveryId=1 orderId=11 customerId=111
+HTTP/1.1 201 
+Connection: keep-alive
+Content-Type: application/json
+Date: Thu, 15 Jun 2023 13:50:52 GMT
+Keep-Alive: timeout=60
+Location: http://localhost:8085/deliveries/1
+Transfer-Encoding: chunked
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+
+{
+    "_links": {
+        "delivery": {
+            "href": "http://localhost:8085/deliveries/1"
+        },
+        "self": {
+            "href": "http://localhost:8085/deliveries/1"
+        }
+    },
+    "customerId": "111",
+    "orderId": 11
+}
+
+
+gitpod /workspace/order (main) $ http localhost:8085/deliveries
+HTTP/1.1 200 
+Connection: keep-alive
+Content-Type: application/hal+json
+Date: Thu, 15 Jun 2023 13:51:02 GMT
+Keep-Alive: timeout=60
+Transfer-Encoding: chunked
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+
+{
+    "_embedded": {
+        "deliveries": [
+            {
+                "_links": {
+                    "delivery": {
+                        "href": "http://localhost:8085/deliveries/1"
+                    },
+                    "self": {
+                        "href": "http://localhost:8085/deliveries/1"
+                    }
+                },
+                "customerId": "111",
+                "orderId": 11
+            }
+        ]
+    },
+    "_links": {
+        "profile": {
+            "href": "http://localhost:8085/profile/deliveries"
+        },
+        "self": {
+            "href": "http://localhost:8085/deliveries"
+        }
+    },
+    "page": {
+        "number": 0,
+        "size": 20,
+        "totalElements": 1,
+        "totalPages": 1
+    }
+}
+
+# 상품재고 등록 처리
+gitpod /workspace/order (main) $ http localhost:8083/stocks stockId=1 productId=1 productName="TV" stockCount=20
+HTTP/1.1 201 
+Connection: keep-alive
+Content-Type: application/json
+Date: Thu, 15 Jun 2023 13:57:15 GMT
+Keep-Alive: timeout=60
+Location: http://localhost:8083/stocks/1
+Transfer-Encoding: chunked
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+
+{
+    "_links": {
+        "self": {
+            "href": "http://localhost:8083/stocks/1"
+        },
+        "stock": {
+            "href": "http://localhost:8083/stocks/1"
+        }
+    },
+    "productId": "1",
+    "productName": "TV",
+    "stockCount": 20
+}
+
+
+gitpod /workspace/order (main) $ http localhost:8083/stocks
+HTTP/1.1 200 
+Connection: keep-alive
+Content-Type: application/hal+json
+Date: Thu, 15 Jun 2023 13:57:30 GMT
+Keep-Alive: timeout=60
+Transfer-Encoding: chunked
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+
+{
+    "_embedded": {
+        "stocks": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://localhost:8083/stocks/1"
+                    },
+                    "stock": {
+                        "href": "http://localhost:8083/stocks/1"
+                    }
+                },
+                "productId": "1",
+                "productName": "TV",
+                "stockCount": 20
+            }
+        ]
+    },
+    "_links": {
+        "profile": {
+            "href": "http://localhost:8083/profile/stocks"
+        },
+        "self": {
+            "href": "http://localhost:8083/stocks"
+        }
+    },
+    "page": {
+        "number": 0,
+        "size": 20,
+        "totalElements": 1,
+        "totalPages": 1
+    }
 }
 
 ```
-실제 구현을 하자면, 카톡 등으로 점주는 노티를 받고, 요리를 마친후, 주문 상태를 UI에 입력할테니, 우선 주문정보를 DB에 받아놓은 후, 이후 처리는 해당 Aggregate 내에서 하면 되겠다.:
-  
-```
-  @Autowired 주문관리Repository 주문관리Repository;
-  
-  @StreamListener(KafkaProcessor.INPUT)
-  public void whenever결제승인됨_주문정보받음(@Payload 결제승인됨 결제승인됨){
 
-      if(결제승인됨.isMe()){
-          카톡전송(" 주문이 왔어요! : " + 결제승인됨.toString(), 주문.getStoreId());
-
-          주문관리 주문 = new 주문관리();
-          주문.setId(결제승인됨.getOrderId());
-          주문관리Repository.save(주문);
-      }
-  }
-
-```
-
-상점 시스템은 주문/결제와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 상점시스템이 유지보수로 인해 잠시 내려간 상태라도 주문을 받는데 문제가 없다:
-```
-# 상점 서비스 (store) 를 잠시 내려놓음 (ctrl+c)
-
-#주문처리
-http localhost:8081/orders item=통닭 storeId=1   #Success
-http localhost:8081/orders item=피자 storeId=2   #Success
-
-#주문상태 확인
-http localhost:8080/orders     # 주문상태 안바뀜 확인
-
-#상점 서비스 기동
-cd 상점
-mvn spring-boot:run
-
-#주문상태 확인
-http localhost:8080/orders     # 모든 주문의 상태가 "배송됨"으로 확인
-```
+#이후 진행건은 msaez가 오류인건지 클래스가 생성되지 않거나 기존에 삭제한 것이 코드상에서는 없어지지 않아 빌드 시 오류가 발생하여 처리 불가 하여 이후 진행은 하지 못했습니다.
 
 
-# 운영
-
-## 오토스케일 아웃
-앞서 CB 는 시스템을 안정되게 운영할 수 있게 해줬지만 사용자의 요청을 100% 받아들여주지 못했기 때문에 이에 대한 보완책으로 자동화된 확장 기능을 적용하고자 한다. 
-
-
-- 결제서비스에 대한 replica 를 동적으로 늘려주도록 HPA 를 설정한다. 설정은 CPU 사용량이 15프로를 넘어서면 replica 를 10개까지 늘려준다:
-```
-kubectl autoscale deploy pay --min=1 --max=10 --cpu-percent=15
-```
-- CB 에서 했던 방식대로 워크로드를 2분 동안 걸어준다.
-```
-siege -c100 -t120S -r10 --content-type "application/json" 'http://localhost:8081/orders POST {"item": "chicken"}'
-```
-- 오토스케일이 어떻게 되고 있는지 모니터링을 걸어둔다:
-```
-kubectl get deploy pay -w
-```
-- 어느정도 시간이 흐른 후 (약 30초) 스케일 아웃이 벌어지는 것을 확인할 수 있다:
-```
-NAME    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-pay     1         1         1            1           17s
-pay     1         2         1            1           45s
-pay     1         4         1            1           1m
-:
-```
-- siege 의 로그를 보아도 전체적인 성공률이 높아진 것을 확인 할 수 있다. 
-```
-Transactions:		        5078 hits
-Availability:		       92.45 %
-Elapsed time:		       120 secs
-Data transferred:	        0.34 MB
-Response time:		        5.60 secs
-Transaction rate:	       17.15 trans/sec
-Throughput:		        0.01 MB/sec
-Concurrency:		       96.02
-```
-
-
-## 무정지 재배포
-
-* 먼저 무정지 재배포가 100% 되는 것인지 확인하기 위해서 Autoscaler 이나 CB 설정을 제거함
-
-- seige 로 배포작업 직전에 워크로드를 모니터링 함.
-```
-siege -c100 -t120S -r10 --content-type "application/json" 'http://localhost:8081/orders POST {"item": "chicken"}'
-
-** SIEGE 4.0.5
-** Preparing 100 concurrent users for battle.
-The server is now under siege...
-
-HTTP/1.1 201     0.68 secs:     207 bytes ==> POST http://localhost:8081/orders
-HTTP/1.1 201     0.68 secs:     207 bytes ==> POST http://localhost:8081/orders
-HTTP/1.1 201     0.70 secs:     207 bytes ==> POST http://localhost:8081/orders
-HTTP/1.1 201     0.70 secs:     207 bytes ==> POST http://localhost:8081/orders
-:
-
-```
-
-- 새버전으로의 배포 시작
-```
-kubectl set image ...
-```
-
-- seige 의 화면으로 넘어가서 Availability 가 100% 미만으로 떨어졌는지 확인
-```
-Transactions:		        3078 hits
-Availability:		       70.45 %
-Elapsed time:		       120 secs
-Data transferred:	        0.34 MB
-Response time:		        5.60 secs
-Transaction rate:	       17.15 trans/sec
-Throughput:		        0.01 MB/sec
-Concurrency:		       96.02
-
-```
-배포기간중 Availability 가 평소 100%에서 70% 대로 떨어지는 것을 확인. 원인은 쿠버네티스가 성급하게 새로 올려진 서비스를 READY 상태로 인식하여 서비스 유입을 진행한 것이기 때문. 이를 막기위해 Readiness Probe 를 설정함:
-
-```
-# deployment.yaml 의 readiness probe 의 설정:
-
-
-kubectl apply -f kubernetes/deployment.yaml
-```
-
-- 동일한 시나리오로 재배포 한 후 Availability 확인:
-```
-Transactions:		        3078 hits
-Availability:		       100 %
-Elapsed time:		       120 secs
-Data transferred:	        0.34 MB
-Response time:		        5.60 secs
-Transaction rate:	       17.15 trans/sec
-Throughput:		        0.01 MB/sec
-Concurrency:		       96.02
-
-```
-
-배포기간 동안 Availability 가 변화없기 때문에 무정지 재배포가 성공한 것으로 확인됨.
